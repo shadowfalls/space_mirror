@@ -1,0 +1,27 @@
+{
+  "name": "setup1",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./src/app.js",
+    "json": "node ./json_server/server.js",
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint_fix": "eslint --fix --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "express": "~4.16.1",
+    "mongodb": "^3.5.9"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.5.0",
+    "json-server": "^0.16.1",
+    "nodemon": "^2.0.4"
+  }
+}
