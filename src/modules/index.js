@@ -7,9 +7,14 @@ const {
   deleteCategory,
 } = require('./Category/Category');
 
-// const {
-// createArticle,
-// } = require('./Article/Article');
+const {
+  getArticle,
+  updateArticle,
+  createArticle,
+  deleteArticle,
+  toggleArticle,
+  getArticlesByCategory,
+} = require('./Article/Article');
 
 const Response = require('../models/Response');
 
@@ -18,19 +23,63 @@ const router = express.Router();
 /**
  * Article APIs
  */
-router.post('/api/create_article', () => {
+router.post('/api/create_article', async (req, res) => {
+  const data = await createArticle(req.body);
+  res.status(data.error ? 500 : 200).send(data);
 });
 
-router.get('/api/get_article/:id', (req, res) => {
+router.post('/api/get_blog_list', async (req, res) => {
+  if (!req.body.catId) {
+    res.status(404).send(new Response(true, 'CategoryId not sent', null, {}));
+    return;
+  }
+  const data = await getArticlesByCategory(req.body.catId);
+  res.status(data.error ? 500 : 200).send(data);
+});
+
+router.get('/api/get_article/:id', async (req, res) => {
   if (!req.params.id) {
     res.status(404).send(new Response(true, 'ArticleId not sent', null, {}));
+    return;
   }
+  const data = await getArticle(req.params.id);
+  res.status(data.error ? 500 : 200).send(data);
 });
 
-router.put('/api/update_article/:id', () => {
+router.put('/api/update_article/:id', async (req, res) => {
+  if (!req.params.id) {
+    res.status(404).send(new Response(true, 'ArticleId not sent', null, {}));
+    return;
+  }
+  const data = await updateArticle(req.params.id, req.body);
+  res.status(data.error ? 500 : 200).send(data);
 });
 
-router.delete('/api/delete_article/:id', () => {
+router.delete('/api/delete_article/:id', async (req, res) => {
+  if (!req.params.id) {
+    res.status(404).send(new Response(true, 'ArticleId not sent', null, {}));
+    return;
+  }
+  const data = await deleteArticle(req.params.id);
+  res.status(data.error ? 500 : 200).send(data);
+});
+
+router.put('/api/activate_article/:id', async (req, res) => {
+  if (!req.params.id) {
+    res.status(404).send(new Response(true, 'ArticleId not sent', null, {}));
+    return;
+  }
+  const data = await toggleArticle(req.params.id, true);
+  res.status(data.error ? 500 : 200).send(data);
+});
+
+router.put('/api/deactivate_article/:id', async (req, res) => {
+  if (!req.params.id) {
+    res.status(404).send(new Response(true, 'ArticleId not sent', null, {}));
+    return;
+  }
+  const data = await toggleArticle(req.params.id, false);
+  res.status(data.error ? 500 : 200).send(data);
 });
 
 /**
@@ -61,7 +110,7 @@ router.delete('/api/delete_category/:id', async (req, res) => {
 });
 
 /**
- *
+ * Fallback route
  */
 
 router.get('/*', (req, res) => {

@@ -6,6 +6,7 @@
     "start": "nodemon ./src/app.js",
     "json": "node ./json_server/server.js",
     "lint": "eslint --ignore-path .gitignore .",
+    "prep_json": "node ./src/core/prepareJson.js",
     "lint_fix": "eslint --fix --ignore-path .gitignore ."
   },
   "dependencies": {
