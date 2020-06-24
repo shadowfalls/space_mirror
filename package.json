@@ -7,7 +7,8 @@
     "json": "node ./json_server/server.js",
     "lint": "eslint --ignore-path .gitignore .",
     "prep_json": "bash ./bin/remove.sh && node ./src/core/prepareJson.js",
-    "lint_fix": "eslint --fix --ignore-path .gitignore ."
+    "lint_fix": "eslint --fix --ignore-path .gitignore .",
+    "asset": "node serve_assets.js"
   },
   "dependencies": {
     "express": "~4.16.1",
