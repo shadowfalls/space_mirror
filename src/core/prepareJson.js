@@ -35,7 +35,7 @@ async function prepareBlogListInCategories() {
     categories.forEach(async (cat) => {
       let catId = cat.name.replace(/ /g, '_');
       catId = catId.toLocaleLowerCase();
-      const articles = await db.collection('article').find({ article: true, categoryId: cat._id.toString() });
+      const articles = await db.collection('article').find({ active: true, categoryId: cat._id.toString() });
       const data = [];
       while (await articles.hasNext()) {
         const art = await articles.next();
