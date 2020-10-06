@@ -112,3 +112,26 @@ exports.toggleArticle = async (id, active) => {
     return new Response(true, 'Cannot update article', {}, error);
   }
 };
+
+exports.getArticleMap = async () => {
+
+  try {
+    const db = await getConnection();
+    const data = await db.collection('article').find({}).toArray();
+    let articleNameMap = {};
+    let articleIdMap = {};
+    if (Array.isArray(data)) {
+      data.forEach((article) => {
+        const key = article.title.toLocaleLowerCase().split(' ').join('_');
+        articleNameMap[key] = article._id;
+        articleIdMap[article._id] = key;
+      });
+    }
+    return new Response(false, 'article map fetched', {
+      articleNameMap,
+      articleIdMap,
+    });
+  } catch (error) {
+    return new Response(true, 'Cannot get article map', {}, error);
+  }
+};

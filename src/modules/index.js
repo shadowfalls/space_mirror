@@ -14,6 +14,7 @@ const {
   deleteArticle,
   toggleArticle,
   getArticlesByCategory,
+  getArticleMap,
 } = require('./Article/Article');
 
 const Response = require('../models/Response');
@@ -106,6 +107,11 @@ router.put('/api/update_category', async (req, res) => {
 
 router.delete('/api/delete_category/:id', async (req, res) => {
   const response = await deleteCategory(req.params.id);
+  res.status(response.error ? 500 : 200).send(response);
+});
+
+router.get('/api/get_article_map', async (req, res) => {
+  const response = await getArticleMap();
   res.status(response.error ? 500 : 200).send(response);
 });
 
