@@ -1,7 +1,8 @@
 const constants = {
   /* mongodb://<host>:<port>/<database name> */
   connectionUrl: 'mongodb://localhost:27017',
-  dbName: 'SPACE_BLOG',
+  dbName: 'CODING_BLOG',
+  dbName_: 'SPACE_BLOG',
   articlesPath: 'api/articles',
   categoriesPath: 'api/categories',
   categoriesTypeJson: '_categorieTypes',

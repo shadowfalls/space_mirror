@@ -49,6 +49,8 @@ async function prepareBlogListInCategories() {
           blogName: art.title,
           date: art.date,
           readTimeMin: art.readTimeMin,
+          keyWords: art.keyWords,
+          coverImage: art.coverImage,
         });
       }
 
@@ -81,6 +83,8 @@ async function prepareRecentArticles() {
           date: d.date,
           readTimeMin: d.readTimeMin,
           blogId: id,
+          coverImage: d.coverImage,
+          keyWords: d.keyWords,
           id: d.id.toString(),
         };
       });
